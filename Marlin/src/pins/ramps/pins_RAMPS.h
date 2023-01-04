@@ -204,15 +204,15 @@
   #define TEMP_1_PIN                          15  // Analog Input
 #endif
 #ifndef TEMP_BED_PIN
-  #define TEMP_BED_PIN                        14  // Analog Input
+  #define TEMP_BED_PIN                        15  // Analog Input
 #endif
 
 //
 // SPI for MAX Thermocouple
 //
-#ifndef TEMP_0_CS_PIN
-  #define TEMP_0_CS_PIN                       66  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
-#endif
+// #ifndef TEMP_0_CS_PIN
+//   #define TEMP_0_CS_PIN                       66  // Don't use 53 if using Display/SD card (SDSS) or 49 (SD_DETECT_PIN)
+// #endif
 
 //
 // Heaters / Fans
@@ -220,9 +220,7 @@
 #ifndef MOSFET_A_PIN
   #define MOSFET_A_PIN                        10
 #endif
-#ifndef MOSFET_B_PIN
-  #define MOSFET_B_PIN                         9
-#endif
+
 #ifndef MOSFET_C_PIN
   #define MOSFET_C_PIN                         8
 #endif
@@ -230,11 +228,11 @@
   #define MOSFET_D_PIN                        -1
 #endif
 
-#define HEATER_0_PIN                MOSFET_A_PIN
+#define HEATER_0_PIN                MOSFET_C_PIN
 
 #if FET_ORDER_EFB                                 // Hotend, Fan, Bed
   #ifndef HEATER_BED_PIN
-    #define HEATER_BED_PIN          MOSFET_C_PIN
+    #define HEATER_BED_PIN          MOSFET_A_PIN
   #endif
 #elif FET_ORDER_EEF                               // Hotend, Hotend, Fan
   #define HEATER_1_PIN              MOSFET_B_PIN
@@ -256,16 +254,14 @@
   #endif
 #endif
 
-#ifndef FAN_PIN
-  #if EITHER(FET_ORDER_EFB, FET_ORDER_EFF)        // Hotend, Fan, Bed or Hotend, Fan, Fan
-    #define FAN_PIN                 MOSFET_B_PIN
-  #elif EITHER(FET_ORDER_EEF, FET_ORDER_SF)       // Hotend, Hotend, Fan or Spindle, Fan
-    #define FAN_PIN                 MOSFET_C_PIN
-  #elif FET_ORDER_EEB                             // Hotend, Hotend, Bed
-    #define FAN_PIN                            4  // IO pin. Buffer needed
-  #else                                           // Non-specific are "EFB" (i.e., "EFBF" or "EFBE")
-    #define FAN_PIN                 MOSFET_B_PIN
-  #endif
+//
+// Heaters / Fans
+//
+#define FAN_PIN                                9  // FAN0
+#define FAN1_PIN                               7  // FAN1
+#define FAN2_PIN                              44  // FAN2
+#ifndef E0_AUTO_FAN_PIN
+  #define E0_AUTO_FAN_PIN               FAN2_PIN
 #endif
 
 //
@@ -285,9 +281,9 @@
   #define FIL_RUNOUT_PIN                       4
 #endif
 
-#ifndef PS_ON_PIN
-  #define PS_ON_PIN                           12
-#endif
+// #ifndef PS_ON_PIN
+//   #define PS_ON_PIN                           12
+// #endif
 
 #if ENABLED(CASE_LIGHT_ENABLE) && !defined(CASE_LIGHT_PIN) && !defined(SPINDLE_LASER_ENA_PIN)
   #if NUM_SERVOS <= 1                             // Prefer the servo connector
