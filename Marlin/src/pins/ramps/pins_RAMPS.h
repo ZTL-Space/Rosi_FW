@@ -261,7 +261,7 @@
 #define FAN1_PIN                               7  // FAN1
 #define FAN2_PIN                              44  // FAN2
 #ifndef E0_AUTO_FAN_PIN
-  #define E0_AUTO_FAN_PIN               FAN2_PIN
+  #define E0_AUTO_FAN_PIN               FAN1_PIN
 #endif
 
 //
